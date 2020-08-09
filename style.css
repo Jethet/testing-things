@@ -21,7 +21,7 @@ body {
   width: 75%;
   font-size: 16px;
   background-color: rgb(158, 180, 252);
-  color: whitesmoke;
+  color: black;
   padding: 20px;
   margin: 20px;
 }
@@ -38,12 +38,12 @@ body {
 
 @media (min-width: 800px) {
   .introduction__content {
-    background-color: orangered;
+    background-color:lightgray;
   }
 }
 
 @media (min-width: 1100px) {
   .introduction {
-    background-color: rgb(216, 216, 6);
+    background-color: lightpink;
   }
 }
