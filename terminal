@@ -1,0 +1,33 @@
+- terminal is often called 'shell'
+- it is an application that you can use, just like any application (Word, calculator, browser)
+- a terminal can be 'bash' or 'zsh': these are terminal types but they do the same
+- you cannot use the mouse in the terminal: only the arrow keys
+- you can run the same command again by using the arrow UP or arrow DOWN keys
+
+useful commands:
+
+pwd     = present working directory: it gives you the folder you are working in
+~       = go to home directory (~ = home)
+cd      = go to home directory
+cd NAME = go to folder/directory NAME
+
+ls      = show list of files in folder/directory
+clear   = clears everything in the terminal
+
+mkdir NAME = make new directory/folder with the name of NAME
+touch NAME = make a new file with the name of NAME
+
+cp NAME    = copy file NAME
+cp NAME FOLDER = copy the file NAME into the folder FOLDER
+
+mv FILELOCATION/NAME FILELOCATION/NAME  = move NAME from one location to a new location
+mv NAME NEWNAME = rename the file NAME to NEWNAME
+
+rm NAME    = remove (delete) file NAME
+
+
+Ctrl C  will terminate most of the commands that are running
+
+
+==>  commands that start with sudo have to do with administrator privileges, don't use them
+     unless you are sure of what you are doing! (sudo = SuperUserDo, superuser is the admin)
