@@ -1,3 +1,21 @@
 #root {
   color: red;
 }
+
+body {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+
+div {
+  margin: 30px 10px;
+  width: 70px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  flex-wrap: wrap;
+}
+
