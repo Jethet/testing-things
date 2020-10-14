@@ -53,30 +53,21 @@ function makePageForEpisodes(episodeList) {
 }
 
 function search() {
-  const searchTerm = document.getElementById("search-term").value.toLowerCase()
+  const searchTerm = document.getElementById("search-term").value.toLowerCase();
   const searchButton = document.getElementById("search-button");
   searchButton.addEventListener("click", (e) => {
-    e.preventDefault()
-    const nameSearch = episode.name.split(" ").toLowerCase()
-    const summarySearch = episode.summary.split(" ").toLowerCase()
-    nameSearch.map((item) => {
+    e.preventDefault();
+    const nameSearch = episode.name.split(" ").toLowerCase();
+    const summarySearch = episode.summary.split(" ").toLowerCase();
+    const searchItems = nameSearch.concat(summarySearch);
+    searchItems.filter((item) => {
       if (searchTerm === item) {
         console.log("Found");
       } else {
         console.log("Not found");
       }
-      searchTerm.innerHTML = ""
-    })
-    summarySearch.map((item) => {
-      if (searchTerm === item) {
-        console.log("Found");
-      } else {
-        console.log("Not found");
-      }
-      searchTerm.innerHTML = ""
-    })
-    
-
+      searchTerm.innerHTML = "";
+    });
   });
 }
 
