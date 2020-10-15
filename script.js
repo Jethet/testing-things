@@ -1,12 +1,13 @@
 function setup() {
   const allEpisodes = getAllEpisodes();
   makePageForEpisodes(allEpisodes);
+  searchEpisodes(allEpisodes);
 }
 
-function makePageForEpisodes(episodeList) {
+function makePageForEpisodes(allEpisodes) {
   const rootElem = document.getElementById("root");
 
-  episodeList.map((episode) => {
+  allEpisodes.map((episode) => {
     const episodeCard = document.createElement("div");
     episodeCard.id = "episode-card";
     const episodeName = document.createElement("h2");
@@ -52,23 +53,51 @@ function makePageForEpisodes(episodeList) {
   });
 }
 
-function search() {
-  const searchTerm = document.getElementById("search-term").value.toLowerCase();
+function searchEpisodes(allEpisodes) {
+  // create button for search
   const searchButton = document.getElementById("search-button");
+  // search on click
   searchButton.addEventListener("click", (e) => {
     e.preventDefault();
-    const nameSearch = episode.name.split(" ").toLowerCase();
-    const summarySearch = episode.summary.split(" ").toLowerCase();
-    const searchItems = nameSearch.concat(summarySearch);
-    searchItems.filter((item) => {
-      if (searchTerm === item) {
-        console.log("Found");
-      } else {
-        console.log("Not found");
-      }
-      searchTerm.innerHTML = "";
+    // get value that is entered for search
+    const searchTerm = document.getElementById("search-term").value;
+    // make word lowercase
+    const searchTermLower = searchTerm.toLowerCase();
+    // iterate over all episodes
+    allEpisodes.map((episode) => {
+      // FOR ALL EPISODES:
+      // a) make episodename lowercase
+      const episodeName = episode.name.toLowerCase();
+      // b) split name into separate words
+      const episodeNameLower = episodeName.split(" ");
+
+      // c) iterate over array with name elements
+      episodeNameLower.map((item) => {
+        // if the searchterm is equal to the item in the name elements array, return this item
+        if (searchTermLower === item) {
+          console.log(item);
+        // if not equal, then return not found
+        } else {
+          console.log("Not found");
+        }
+      });
+
+      // const summarySearch = episode.summary.split(" ").toLowerCase();
+      // const searchItems = nameSearch.concat(summarySearch);
     });
   });
+  // searchTerm.innerHTML = "";
 }
 
 window.onload = setup;
+
+// for(let i=0; i<getAllShows().length; i++){
+//   let listofshows=document.getElementById("listofshows")
+//       listofshows.classList="col-lg-4 p-2"
+//       listofshows.innerHTML="<div class='card' style='width: 18rem'/>
+//       <img class='card-img-top' src='#' alt='Card image cap'>
+//       <div class='card-body'>
+//         <h5 class='card-title'>Card title</h5>
+//         <p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+//         <a href='#' class='btn btn-primary'>Go somewhere</a>
+//       </div>"
