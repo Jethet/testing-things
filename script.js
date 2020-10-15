@@ -63,6 +63,7 @@ function searchEpisodes(allEpisodes) {
     const searchTerm = document.getElementById("search-term").value;
     // make word lowercase
     const searchTermLower = searchTerm.toLowerCase();
+
     // iterate over all episodes
     allEpisodes.map((episode) => {
       // FOR ALL EPISODES:
@@ -70,24 +71,26 @@ function searchEpisodes(allEpisodes) {
       const episodeName = episode.name.toLowerCase();
       // b) split name into separate words
       const episodeNameLower = episodeName.split(" ");
+      // c) make summary lowercase
+      const summary = episode.summary.toLowerCase()
+      // d) split summary into separate words
+      const summaryLower = summary.split(" ")
 
-      // c) iterate over array with name elements
-      episodeNameLower.map((item) => {
-        // if the searchterm is equal to the item in the name elements array, return this item
-        if (searchTermLower === item) {
-          console.log(item);
-        // if not equal, then return not found
-        } else {
-          console.log("Not found");
-        }
-      });
-
-      // const summarySearch = episode.summary.split(" ").toLowerCase();
-      // const searchItems = nameSearch.concat(summarySearch);
+      if (episodeNameLower.includes(searchTermLower) || summaryLower.includes(searchTermLower)) {
+        const episodeName = episodeNameLower.join(" ")
+        const summary = summaryLower.join(" ")
+        console.log(episodeName, summary);
+        return episodeName, summary
+      } else {
+        console.log("Not found");
+      }
     });
+
+    // const summarySearch = episode.summary.split(" ").toLowerCase();
+    // const searchItems = nameSearch.concat(summarySearch);
   });
-  // searchTerm.innerHTML = "";
 }
+// searchTerm.innerHTML = "";
 
 window.onload = setup;
 
