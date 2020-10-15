@@ -72,17 +72,21 @@ function searchEpisodes(allEpisodes) {
       // b) split name into separate words
       const episodeNameLower = episodeName.split(" ");
       // c) make summary lowercase
-      const summary = episode.summary.toLowerCase()
+      const summary = episode.summary.toLowerCase();
       // d) split summary into separate words
-      const summaryLower = summary.split(" ")
+      const summaryLower = summary.split(" ");
 
-      if (episodeNameLower.includes(searchTermLower) || summaryLower.includes(searchTermLower)) {
-        const episodeName = episodeNameLower.join(" ")
-        const summary = summaryLower.join(" ")
+      if (
+        episodeNameLower.includes(searchTermLower) ||
+        summaryLower.includes(searchTermLower)
+      ) {
+        const episodeName = episodeNameLower.join(" ");
+        const summary = summaryLower.join(" ");
         console.log(episodeName, summary);
-        return episodeName, summary
+        return;
       } else {
         console.log("Not found");
+        return;
       }
     });
 
