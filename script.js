@@ -13,7 +13,6 @@ function makePageForEpisodes(allEpisodes) {
     const episodeName = document.createElement("h2");
     episodeName.innerHTML = episode.name;
     episodeCard.appendChild(episodeName);
-    // episodeName.innerHTML = episode.name
     rootElem.appendChild(episodeCard);
 
     const seasonNumber = document.createElement("span");
@@ -75,25 +74,67 @@ function searchEpisodes(allEpisodes) {
       const summary = episode.summary.toLowerCase();
       // d) split summary into separate words
       const summaryLower = summary.split(" ");
-
+      searchResults = [];
+      allEpisodes = "";
       if (
         episodeNameLower.includes(searchTermLower) ||
         summaryLower.includes(searchTermLower)
       ) {
-        const episodeName = episodeNameLower.join(" ");
-        const summary = summaryLower.join(" ");
-        console.log(episodeName, summary);
-        return;
-      } else {
-        console.log("Not found");
-        return;
-      }
-    });
+        searchResults.push(episodeNameLower);
 
-    // const summarySearch = episode.summary.split(" ").toLowerCase();
-    // const searchItems = nameSearch.concat(summarySearch);
+        searchResults.forEach((result) => {
+          const episodeName = episodeNameLower.join(" ");
+          const summary = summaryLower.join(" ");
+          console.log(episodeName, summary);
+
+          const rootElem = document.getElementById("root");
+          rootElem.innerHTML = "";
+          const filteredEpisode = document.createElement("h2");
+          filteredEpisode.innerHTML = episode.name;
+          rootElem.appendChild(filteredEpisode);
+
+          const seasonNumber = document.createElement("span");
+          if (episode.season < 10) {
+            episode.season = `  -  S0${episode.season}`;
+          } else {
+            episode.season = `  -  S${episode.season}`;
+          }
+          seasonNumber.innerHTML = episode.season;
+          filteredEpisode.appendChild(seasonNumber);
+
+          const episodeNumber = document.createElement("span");
+          if (episode.number < 10) {
+            episode.number = `E0${episode.number}`;
+          } else {
+            episode.number = `E${episode.number}`;
+          }
+          episodeNumber.innerHTML = episode.number;
+          seasonNumber.appendChild(episodeNumber);
+
+          const lineBreak = document.createElement("br");
+          seasonNumber.appendChild(lineBreak);
+
+          const episodeImage = document.createElement("img");
+          episodeImage.src = episode.image.medium;
+          filteredEpisode.appendChild(episodeImage);
+
+          const episodeSummary = document.createElement("h4");
+          episodeSummary.innerHTML = episode.summary;
+          filteredEpisode.appendChild(episodeSummary);
+
+          const disclaimer = document.createElement("p");
+          const episodeLink = episode._links.self.href;
+          disclaimer.innerHTML = `All data has originally come from TVMaze.com: ${episodeLink}`;
+          disclaimer.style.fontSize = "14px";
+          filteredEpisode.appendChild(disclaimer);
+        });
+      }
+
+      document.getElementById("search-term").value = "";
+    });
   });
 }
+
 // searchTerm.innerHTML = "";
 
 window.onload = setup;
