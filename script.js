@@ -66,7 +66,7 @@ function searchEpisodes(allEpisodes) {
     // iterate over all episodes
     allEpisodes.map((episode) => {
       // FOR ALL EPISODES:
-      // a) make episodename lowercase
+      // a) make episode name lowercase
       const episodeName = episode.name.toLowerCase();
       // b) split name into separate words
       const episodeNameLower = episodeName.split(" ");
@@ -74,6 +74,19 @@ function searchEpisodes(allEpisodes) {
       const summary = episode.summary.toLowerCase();
       // d) split summary into separate words
       const summaryLower = summary.split(" ");
+      // e) create season and episode numbers
+      // const seasonNumber = document.createElement("span");
+      if (episode.season < 10) {
+        episode.season = `  -  S0${episode.season}`;
+      } else if (episode.season > 10) {
+        episode.season = `  -  S${episode.season}`;
+      } else if (episode.number < 10) {
+        episode.number = `E0${episode.number}`;
+      } else if (episode.number < 10) {
+        episode.number = `E${episode.number}`;
+      }
+      const seasonNumber = `${episode.season}${episode.number}`;
+
       searchResults = [];
       allEpisodes = "";
       if (
@@ -82,37 +95,15 @@ function searchEpisodes(allEpisodes) {
       ) {
         searchResults.push(episodeNameLower);
 
-        searchResults.forEach((result) => {
-          const episodeName = episodeNameLower.join(" ");
-          const summary = summaryLower.join(" ");
-          console.log(episodeName, summary);
+        searchResults.map((result) => {
+          console.log(result);
 
           const rootElem = document.getElementById("root");
           rootElem.innerHTML = "";
+
           const filteredEpisode = document.createElement("h2");
-          filteredEpisode.innerHTML = episode.name;
+          filteredEpisode.innerHTML = `${episode.name}${seasonNumber}`;
           rootElem.appendChild(filteredEpisode);
-
-          const seasonNumber = document.createElement("span");
-          if (episode.season < 10) {
-            episode.season = `  -  S0${episode.season}`;
-          } else {
-            episode.season = `  -  S${episode.season}`;
-          }
-          seasonNumber.innerHTML = episode.season;
-          filteredEpisode.appendChild(seasonNumber);
-
-          const episodeNumber = document.createElement("span");
-          if (episode.number < 10) {
-            episode.number = `E0${episode.number}`;
-          } else {
-            episode.number = `E${episode.number}`;
-          }
-          episodeNumber.innerHTML = episode.number;
-          seasonNumber.appendChild(episodeNumber);
-
-          const lineBreak = document.createElement("br");
-          seasonNumber.appendChild(lineBreak);
 
           const episodeImage = document.createElement("img");
           episodeImage.src = episode.image.medium;
@@ -135,17 +126,4 @@ function searchEpisodes(allEpisodes) {
   });
 }
 
-// searchTerm.innerHTML = "";
-
 window.onload = setup;
-
-// for(let i=0; i<getAllShows().length; i++){
-//   let listofshows=document.getElementById("listofshows")
-//       listofshows.classList="col-lg-4 p-2"
-//       listofshows.innerHTML="<div class='card' style='width: 18rem'/>
-//       <img class='card-img-top' src='#' alt='Card image cap'>
-//       <div class='card-body'>
-//         <h5 class='card-title'>Card title</h5>
-//         <p class='card-text'>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-//         <a href='#' class='btn btn-primary'>Go somewhere</a>
-//       </div>"
