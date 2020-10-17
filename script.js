@@ -105,6 +105,9 @@ function searchEpisodes(allEpisodes) {
           filteredEpisode.innerHTML = `${episode.name}${seasonNumber}`;
           rootElem.appendChild(filteredEpisode);
 
+          const lineBreak = document.createElement("br");
+          filteredEpisode.appendChild(lineBreak);
+
           const episodeImage = document.createElement("img");
           episodeImage.src = episode.image.medium;
           filteredEpisode.appendChild(episodeImage);
