@@ -65,18 +65,28 @@ app.put("/albums/:albumId", (req, res) => {
   res.status(200).send();
 });
 
-app.delete("/album/:albumId", (req, res) => {
-  const albumId = req.params.albumId;
 
-  albumsData.find((album) => {
-    if (album.albumId === albumId) {
-      albumsData.slice(albumId, 1);
-      console.log(`Album with id ${albumId} deleted.`);
-    } else {
-      res.status(404).send();
-    }
-  });
-});
+
+app.delete('/albums/:albumId', function(req, res) {
+  const albumId = req.params.albumId
+
+  //find the INDEX of the album with that id
+  const index = albumsData.findIndex(album => album.albumId == albumId)
+  console.log(index);
+  
+  // findIndex returns -1 if the album is not found
+  if (index == -1) {
+    res.status(404).send()
+    return
+  }
+
+  // remove the element at this index from the array
+  // (in this case we don't need to replace it with undefined because IDs are not determined by the albums position in the array)
+  albumsData.splice(index, 1)
+
+  //return { success: true }
+  res.send({ success: true })
+})
 
 // returns the next ID in the sequence
 function getNextAlbumId() {
